@@ -49,15 +49,12 @@ print(cube(4))
 #===========================================================================================
 from typing import Callable, Dict
 
-
 # Визначення функцій
 def add(a: int, b: int) -> int:
     return a + b
 
-
 def multiply(a: int, b: int) -> int:
     return a * b
-
 
 def power(exponent: int) -> Callable[[int], int]:
 
@@ -65,7 +62,6 @@ def power(exponent: int) -> Callable[[int], int]:
         return base ** exponent
 
     return inner
-
 
 # Використання power для створення функцій square та cube
 square = power(2)

@@ -38,7 +38,6 @@ print(complicated(2, 3))
 #===========================================================================================
 from functools import wraps
 
-
 def logger(func):
 
     @wraps(func)
@@ -49,7 +48,6 @@ def logger(func):
         return result
 
     return inner
-
 
 @logger
 def complicated(x: int, y: int) -> int:
