@@ -1,0 +1,6 @@
+[23:19:31] Contact 'Ivan' added
+[23:19:41] Contact 'Anna' added
+[23:20:12] Contact 'Ivan' added
+[23:21:35] AddressBook saved
+[00:02:31] AddressBook saved
+[19:52:52] AddressBook saved

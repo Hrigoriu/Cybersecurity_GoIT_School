@@ -1,0 +1,8 @@
+[22:57:26] Addressbook has been loaded!
+[22:57:28] Contact Maxim has been added.
+[22:57:37] Birthday for Maxim has been added/updated.
+[22:58:15] Addressbook has been saved!
+[23:28:41] Addressbook has been loaded!
+[19:51:30] Addressbook has been loaded!
+[19:53:04] Addressbook has been loaded!
+[19:53:40] Addressbook has been saved!
