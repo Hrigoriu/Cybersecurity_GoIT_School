@@ -1,0 +1,59 @@
+('D:\\IT school\\Projects\\Projects_GoIT\\Cybersecurity\\Python_Web_2.0\\02. '
+ 'Модуль 2. Python Development\\ClassWork\\project3\\build\\test\\test.pkg',
+ {'BINARY': True,
+  'DATA': True,
+  'EXECUTABLE': True,
+  'EXTENSION': True,
+  'PYMODULE': True,
+  'PYSOURCE': True,
+  'PYZ': False,
+  'SPLASH': True,
+  'SYMLINK': False},
+ [('pyi-contents-directory _internal', '', 'OPTION'),
+  ('PYZ-00.pyz',
+   'D:\\IT school\\Projects\\Projects_GoIT\\Cybersecurity\\Python_Web_2.0\\02. '
+   'Модуль 2. Python Development\\ClassWork\\project3\\build\\test\\PYZ-00.pyz',
+   'PYZ'),
+  ('struct',
+   'D:\\IT school\\Projects\\Projects_GoIT\\Cybersecurity\\Python_Web_2.0\\02. '
+   'Модуль 2. Python '
+   'Development\\ClassWork\\project3\\build\\test\\localpycs\\struct.pyc',
+   'PYMODULE'),
+  ('pyimod01_archive',
+   'D:\\IT school\\Projects\\Projects_GoIT\\Cybersecurity\\Python_Web_2.0\\02. '
+   'Модуль 2. Python '
+   'Development\\ClassWork\\project3\\build\\test\\localpycs\\pyimod01_archive.pyc',
+   'PYMODULE'),
+  ('pyimod02_importers',
+   'D:\\IT school\\Projects\\Projects_GoIT\\Cybersecurity\\Python_Web_2.0\\02. '
+   'Модуль 2. Python '
+   'Development\\ClassWork\\project3\\build\\test\\localpycs\\pyimod02_importers.pyc',
+   'PYMODULE'),
+  ('pyimod03_ctypes',
+   'D:\\IT school\\Projects\\Projects_GoIT\\Cybersecurity\\Python_Web_2.0\\02. '
+   'Модуль 2. Python '
+   'Development\\ClassWork\\project3\\build\\test\\localpycs\\pyimod03_ctypes.pyc',
+   'PYMODULE'),
+  ('pyimod04_pywin32',
+   'D:\\IT school\\Projects\\Projects_GoIT\\Cybersecurity\\Python_Web_2.0\\02. '
+   'Модуль 2. Python '
+   'Development\\ClassWork\\project3\\build\\test\\localpycs\\pyimod04_pywin32.pyc',
+   'PYMODULE'),
+  ('pyiboot01_bootstrap',
+   'C:\\Users\\User\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\PyInstaller\\loader\\pyiboot01_bootstrap.py',
+   'PYSOURCE'),
+  ('pyi_rth_inspect',
+   'C:\\Users\\User\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_inspect.py',
+   'PYSOURCE'),
+  ('test',
+   'D:\\IT school\\Projects\\Projects_GoIT\\Cybersecurity\\Python_Web_2.0\\02. '
+   'Модуль 2. Python Development\\ClassWork\\project3\\test.py',
+   'PYSOURCE')],
+ 'python312.dll',
+ True,
+ False,
+ False,
+ [],
+ None,
+ None,
+ None)

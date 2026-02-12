@@ -6,3 +6,5 @@
 [19:51:30] Addressbook has been loaded!
 [19:53:04] Addressbook has been loaded!
 [19:53:40] Addressbook has been saved!
+[23:25:07] Addressbook has been loaded!
+[23:25:19] Addressbook has been saved!

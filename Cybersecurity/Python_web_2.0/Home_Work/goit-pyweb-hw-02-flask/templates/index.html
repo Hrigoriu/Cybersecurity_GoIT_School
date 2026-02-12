@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card shadow">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h4 class="mb-0">Список контактів</h4>
+        <a href="/add" class="btn btn-success btn-sm">+ Додати новий</a>
+    </div>
+    <div class="card-body">
+        {% if contacts %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Ім'я</th>
+                    <th>Телефони</th>
+                    <th>ДН</th>
+                    <th>Дії</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for contact in contacts %}
+                <tr>
+                    <td><strong>{{ contact.name.value }}</strong></td>
+                    <td>
+                        {% for phone in contact.phones %}
+                            <span class="badge bg-secondary">{{ phone.value }}</span>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% if contact.birthday %}
+                            {{ contact.birthday.date.strftime('%d.%m.%Y') }}
+                        {% else %}
+                            <span class="text-muted">-</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="/delete/{{ contact.name.value }}" 
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('Ви впевнені?')">Видалити</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <p class="text-center text-muted">Книга контактів порожня.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

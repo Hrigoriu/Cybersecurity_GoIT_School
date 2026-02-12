@@ -1,0 +1,13 @@
+Ігноруємо системні файли та середовища
+
+.git
+.gitignore
+.venv
+pycache
+.idea
+.vscode
+Dockerfile
+
+Папку data не копіюємо, а підключаємо як Volume для збереження даних на ПК
+
+data/
