@@ -1,5 +1,12 @@
 {
-    "geminiAssistant.model": "gemini-2.5-pro-exp-03-25",
-    "geminiAssistant.apiKey": "AIzaSyCiujJDg_fTdXO2FRR-v7Wf766K6p3zLaE",
-    "geminiAssistant.customModelName": "Generative Language API Key"
+  "geminiAssistant.model": "gemini-2.5-pro-exp-03-25",
+  "geminiAssistant.apiKey": "AIzaSyCiujJDg_fTdXO2FRR-v7Wf766K6p3zLaE",
+  "geminiAssistant.customModelName": "Generative Language API Key",
+  "editor.formatOnSave": true,
+  "rust-analyzer.checkOnSave.command": "clippy",
+  "rust-analyzer.cargo.buildScripts.enable": true,
+  "rust-analyzer.procMacro.enable": true,
+  "editor.inlayHints.enabled": "on",
+  "editor.semanticHighlighting.enabled": true,
+  "geminicodeassist.project": "responsive-legacy-5sdh5"
 }
