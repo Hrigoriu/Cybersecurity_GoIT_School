@@ -3,10 +3,10 @@ import faker
 from random import randint
 
 # Налаштуємо кількість записів для генерації
-NUMBER_GROUPS = 3
-NUMBER_STUDENTS = 40
-NUMBER_TEACHERS = 4
-NUMBER_SUBJECTS = 6
+NUMBER_GROUPS = 5
+NUMBER_STUDENTS = 60
+NUMBER_TEACHERS = 6
+NUMBER_SUBJECTS = 8
 MAX_GRADES_PER_STUDENT = 15
 
 
@@ -30,6 +30,8 @@ def generate_fake_data() -> tuple:
         "Історія України",
         "Англійська мова",
         "Бази даних",
+        "Комп'ютерні мережі",
+        "Алгоритми та структури даних",
     ]
     # Для кожного предмета випадково обираємо ID викладача (від 1 до NUMBER_TEACHERS)
     subjects = [
@@ -50,8 +52,8 @@ def generate_fake_data() -> tuple:
         for _ in range(num_grades):
             # Обираємо випадковий предмет (ID від 1 до NUMBER_SUBJECTS)
             subject_id = randint(1, NUMBER_SUBJECTS)
-            # Ставимо оцінку від 60 до 100 балів
-            grade = randint(60, 100)
+            # Ставимо оцінку від 4 до 12 балів
+            grade = randint(4, 12)
             # Генеруємо дату за останній рік
             date_received = fake.date_between(start_date="-1y", end_date="today")
             # Додаємо кортеж у загальний список
