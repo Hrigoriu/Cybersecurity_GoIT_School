@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "med-notification-system"
+version = "0.1.0"
+description = "RabbitMQ Producer/Consumer system with MongoDB"
+authors = ["Hrigoriu Programmer <Hrigoriu@gmail.com>"]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.10"
+mongoengine = "^0.27.0"
+pika = "^1.3.2"
+faker = "^24.0.0"
+python-dotenv = "^1.0.1"
+colorama = "^0.4.6"
+pymongo = "4.3.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

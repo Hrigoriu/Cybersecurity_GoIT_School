@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Retro-Tech Quotes Database: Інтерактивний огляд</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      .chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 300px;
+        max-height: 400px;
+      }
+      @media (min-width: 768px) {
+        .chart-container {
+          height: 350px;
+        }
+      }
+
+      .layer-card {
+        transition: all 0.3s ease;
+      }
+      .layer-card:hover {
+        transform: translateY(-5px);
+        box-shadow:
+          0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+
+      .tab-active {
+        background-color: #10b981;
+        color: white;
+      }
+      .tab-inactive {
+        background-color: #e5e7eb;
+        color: #374151;
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              stone: {
+                50: "#fafaf9",
+                100: "#f5f5f4",
+                800: "#292524",
+                900: "#1c1917",
+              },
+              emerald: {
+                500: "#10b981",
+                600: "#059669",
+              },
+              amber: {
+                500: "#f59e0b",
+              },
+            },
+            fontFamily: {
+              sans: ["Inter", "system-ui", "sans-serif"],
+              mono: ["Courier New", "Courier", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-stone-50 text-stone-800 font-sans leading-relaxed min-h-screen flex flex-col"
+  >
+    <!-- Chosen Palette: Warm Neutrals (Stone) with Emerald and Amber accents. -->
+    <!-- Application Structure Plan: The SPA is structured as an interactive documentation dashboard. It prioritizes user journey from high-level understanding (Overview & Value) -> Technical depth (Architecture & Stack) -> Practical Application (Interactive Terminal Simulator) -> Setup & Data Model. This non-linear, sectioned approach allows users to explore the conceptual architecture before diving into code instructions, which is better for synthesizing the project's portfolio value. -->
+    <!-- Visualization & Content Choices:
+         1. Tech Stack -> Doughnut Chart (Chart.js) -> Shows relative importance/roles of technologies. Interactive hover. NO SVG.
+         2. Architecture -> CSS Grid/Flexbox Cards -> Shows layered flow (Repo -> Service -> Controller). Interactive hover state. NO SVG.
+         3. CLI Usage -> Interactive Terminal Simulator (HTML/JS) -> User clicks a search type, the "terminal" types out the command and shows the result. Better than a static list.
+         4. Caching Logic -> State Toggle (HTML/JS) -> Visually demonstrates Request 1 (DB) vs Request 2 (Redis).
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <nav class="bg-stone-900 text-stone-50 sticky top-0 z-50 shadow-md">
+      <div
+        class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center"
+      >
+        <div class="text-xl font-mono font-bold tracking-tighter">
+          <span class="text-emerald-500">>_</span> RetroQuotesDB
+        </div>
+        <div class="flex space-x-4 overflow-x-auto text-sm">
+          <button
+            onclick="scrollToSection('overview')"
+            class="hover:text-emerald-400 whitespace-nowrap"
+          >
+            Огляд
+          </button>
+          <button
+            onclick="scrollToSection('architecture')"
+            class="hover:text-emerald-400 whitespace-nowrap"
+          >
+            Архітектура
+          </button>
+          <button
+            onclick="scrollToSection('usage')"
+            class="hover:text-emerald-400 whitespace-nowrap"
+          >
+            Інтерактив
+          </button>
+          <button
+            onclick="scrollToSection('data-model')"
+            class="hover:text-emerald-400 whitespace-nowrap"
+          >
+            Модель Даних
+          </button>
+          <button
+            onclick="scrollToSection('setup')"
+            class="hover:text-emerald-400 whitespace-nowrap"
+          >
+            Встановлення
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="flex-grow w-full max-w-6xl mx-auto px-4 py-8 space-y-16">
+      <section id="overview" class="pt-8">
+        <div class="mb-6">
+          <h1 class="text-4xl font-bold text-stone-900 mb-4">
+            Аналітика проєкту: Retro-Tech Quotes Database
+          </h1>
+          <p
+            class="text-lg text-stone-600 border-l-4 border-emerald-500 pl-4 py-1 bg-stone-100"
+          >
+            Цей розділ надає загальне розуміння суті застосунку. Тут зібрано
+            ключові цілі та технологічні рішення, які роблять цей проєкт
+            потужним інструментом для бекенд-портфоліо.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <div class="space-y-4">
+            <h2 class="text-2xl font-semibold">Що це таке?</h2>
+            <p>
+              Це консольний пошуковий застосунок для цитат, створений на
+              <strong>Python</strong>. Він побудований на основі чистої
+              багатошарової архітектури та стилізований під ретро-термінал.
+            </p>
+
+            <div
+              class="bg-white p-6 rounded-lg shadow-sm border border-stone-200 mt-4"
+            >
+              <h3 class="text-lg font-bold mb-3 text-amber-600">
+                Чому цей проєкт сильний для портфоліо?
+              </h3>
+              <ul class="list-disc list-inside space-y-2 text-stone-700">
+                <li>Багатошарова архітектура (Layered Architecture)</li>
+                <li>Cache-first підхід (Redis) для оптимізації читання</li>
+                <li>Хмарні інтеграції (MongoDB Atlas)</li>
+                <li>Separation of Concerns (розділення відповідальності)</li>
+                <li>Конфігурація через змінні середовища</li>
+              </ul>
+            </div>
+          </div>
+
+          <div
+            class="bg-white p-6 rounded-xl shadow-sm border border-stone-200"
+          >
+            <h3 class="text-center font-bold text-lg mb-2">
+              Технологічний стек
+            </h3>
+            <div class="chart-container">
+              <canvas id="techStackChart"></canvas>
+            </div>
+            <p class="text-center text-sm text-stone-500 mt-2">
+              Розподіл технологій за їхньою роллю в інфраструктурі
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="architecture" class="pt-8">
+        <div class="mb-6">
+          <h2 class="text-3xl font-bold text-stone-900 mb-4">
+            Архітектура та Кешування
+          </h2>
+          <p
+            class="text-lg text-stone-600 border-l-4 border-amber-500 pl-4 py-1 bg-stone-100"
+          >
+            У цьому розділі візуалізовано внутрішню будову застосунку. Ви можете
+            побачити, як запити проходять через шари системи (SOLID) та як Redis
+            допомагає оптимізувати повторні звернення до бази даних.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div
+            class="bg-white p-6 rounded-xl shadow-sm border border-stone-200"
+          >
+            <h3 class="text-xl font-bold mb-4 text-center">
+              Багатошарова Архітектура
+            </h3>
+            <div class="flex flex-col space-y-4">
+              <div
+                class="layer-card bg-stone-100 p-4 rounded border-l-4 border-stone-800 text-center"
+              >
+                <span class="text-2xl block mb-1">🖥️</span>
+                <span class="font-bold block">Controller Layer</span>
+                <span class="text-sm text-stone-600"
+                  >Обробка команд користувача (CLI)</span
+                >
+              </div>
+              <div class="flex justify-center text-stone-400">⬇️</div>
+              <div
+                class="layer-card bg-emerald-50 p-4 rounded border-l-4 border-emerald-500 text-center"
+              >
+                <span class="text-2xl block mb-1">⚙️</span>
+                <span class="font-bold block">Service Layer</span>
+                <span class="text-sm text-stone-600"
+                  >Бізнес-логіка та керування кешем</span
+                >
+              </div>
+              <div class="flex justify-center text-stone-400">⬇️</div>
+              <div
+                class="layer-card bg-amber-50 p-4 rounded border-l-4 border-amber-500 text-center"
+              >
+                <span class="text-2xl block mb-1">💾</span>
+                <span class="font-bold block">Repository Layer</span>
+                <span class="text-sm text-stone-600"
+                  >Прямі запити до MongoDB</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="bg-white p-6 rounded-xl shadow-sm border border-stone-200 flex flex-col"
+          >
+            <h3 class="text-xl font-bold mb-4 text-center">
+              Логіка Кешування (Redis)
+            </h3>
+
+            <div class="flex justify-center space-x-2 mb-6">
+              <button
+                id="btn-request-1"
+                onclick="simulateCache(1)"
+                class="tab-active px-4 py-2 rounded-l font-medium"
+              >
+                Перший запит
+              </button>
+              <button
+                id="btn-request-2"
+                onclick="simulateCache(2)"
+                class="tab-inactive px-4 py-2 rounded-r font-medium"
+              >
+                Повторний запит
+              </button>
+            </div>
+
+            <div
+              id="cache-viz-1"
+              class="flex-grow flex flex-col justify-center items-center space-y-4 text-center p-4 bg-stone-50 rounded border border-stone-200"
+            >
+              <div
+                class="font-mono bg-stone-800 text-emerald-400 px-3 py-1 rounded"
+              >
+                name: Albert Einstein
+              </div>
+              <div class="text-stone-500 text-sm">
+                Перевірка Redis... Кешу немає ❌
+              </div>
+              <div class="text-2xl">⬇️</div>
+              <div class="font-bold text-amber-600 text-xl">MongoDB Atlas</div>
+              <div class="text-sm text-stone-600">
+                [DB] Executing query in MongoDB...
+              </div>
+              <div class="text-2xl">⬆️</div>
+              <div class="text-stone-500 text-sm">
+                Збереження результату в Redis 📝
+              </div>
+            </div>
+
+            <div
+              id="cache-viz-2"
+              class="hidden flex-grow flex flex-col justify-center items-center space-y-4 text-center p-4 bg-emerald-50 rounded border border-emerald-200"
+            >
+              <div
+                class="font-mono bg-stone-800 text-emerald-400 px-3 py-1 rounded"
+              >
+                name: Albert Einstein
+              </div>
+              <div class="text-stone-500 text-sm">
+                Перевірка Redis... Кеш знайдено! ✅
+              </div>
+              <div class="text-2xl text-emerald-500">⬇️</div>
+              <div class="font-bold text-emerald-600 text-xl">
+                Redis Cache (In-Memory)
+              </div>
+              <div class="text-sm text-stone-600">
+                [SYS] Data retrieved from Redis cache...
+              </div>
+              <div
+                class="mt-4 text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-1 rounded"
+              >
+                Запит не доходить до MongoDB, що економить час та ресурси.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="usage" class="pt-8">
+        <div class="mb-6">
+          <h2 class="text-3xl font-bold text-stone-900 mb-4">
+            Можливості Пошуку (Симулятор)
+          </h2>
+          <p
+            class="text-lg text-stone-600 border-l-4 border-stone-800 pl-4 py-1 bg-stone-100"
+          >
+            Тут ви можете інтерактивно дослідити підтримувані формати пошуку.
+            Натискайте на кнопки зліва, щоб побачити, як виглядає симуляція
+            роботи CLI-застосунку у ретро-терміналі справа.
+          </p>
+        </div>
+
+        <div
+          class="flex flex-col md:flex-row bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden"
+        >
+          <div
+            class="w-full md:w-1/3 bg-stone-100 border-r border-stone-200 flex flex-col"
+          >
+            <button
+              onclick="runCommand('exact-name')"
+              class="p-4 text-left hover:bg-stone-200 border-b border-stone-200 font-medium flex justify-between items-center group"
+            >
+              <span>Точне ім'я</span>
+              <span class="text-stone-400 group-hover:text-stone-800">▶</span>
+            </button>
+            <button
+              onclick="runCommand('regex-name')"
+              class="p-4 text-left hover:bg-stone-200 border-b border-stone-200 font-medium flex justify-between items-center group"
+            >
+              <span>Частина імені (Regex)</span>
+              <span class="text-stone-400 group-hover:text-stone-800">▶</span>
+            </button>
+            <button
+              onclick="runCommand('exact-tag')"
+              class="p-4 text-left hover:bg-stone-200 border-b border-stone-200 font-medium flex justify-between items-center group"
+            >
+              <span>Один тег</span>
+              <span class="text-stone-400 group-hover:text-stone-800">▶</span>
+            </button>
+            <button
+              onclick="runCommand('regex-tag')"
+              class="p-4 text-left hover:bg-stone-200 border-b border-stone-200 font-medium flex justify-between items-center group"
+            >
+              <span>Частина тегу</span>
+              <span class="text-stone-400 group-hover:text-stone-800">▶</span>
+            </button>
+            <button
+              onclick="runCommand('multi-tag')"
+              class="p-4 text-left hover:bg-stone-200 font-medium flex justify-between items-center group"
+            >
+              <span>Кілька тегів (OR)</span>
+              <span class="text-stone-400 group-hover:text-stone-800">▶</span>
+            </button>
+          </div>
+
+          <div
+            class="w-full md:w-2/3 bg-stone-900 p-6 font-mono text-sm min-h-[300px] flex flex-col"
+          >
+            <div class="flex space-x-2 mb-4">
+              <div class="w-3 h-3 rounded-full bg-red-500"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+              <div class="w-3 h-3 rounded-full bg-green-500"></div>
+            </div>
+            <div
+              id="terminal-output"
+              class="text-emerald-400 flex-grow whitespace-pre-wrap leading-relaxed"
+            >
+              Welcome to Retro-Tech Quotes Database! Type a command or select an
+              option from the menu. >_
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="data-model" class="pt-8">
+        <div class="mb-6">
+          <h2 class="text-3xl font-bold text-stone-900 mb-4">
+            Модель Даних (MongoEngine)
+          </h2>
+          <p
+            class="text-lg text-stone-600 border-l-4 border-emerald-500 pl-4 py-1 bg-stone-100"
+          >
+            Цей блок демонструє структуру NoSQL бази даних. Відносини між
+            авторами та їхніми цитатами реалізовані через об'єктно-орієнтоване
+            відображення (ODM) із використанням ReferenceField.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
+          <div
+            class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm z-10"
+          >
+            <div
+              class="flex items-center space-x-3 mb-4 border-b border-stone-100 pb-2"
+            >
+              <span class="text-2xl">👤</span>
+              <h3 class="text-xl font-bold font-mono">Author</h3>
+            </div>
+            <ul class="space-y-2 font-mono text-sm">
+              <li><span class="text-emerald-600">fullname</span>: String</li>
+              <li><span class="text-emerald-600">born_date</span>: String</li>
+              <li>
+                <span class="text-emerald-600">born_location</span>: String
+              </li>
+              <li><span class="text-emerald-600">description</span>: String</li>
+            </ul>
+          </div>
+
+          <div
+            class="hidden md:flex absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0 text-stone-300"
+          >
+            <span class="text-4xl">🔗</span>
+          </div>
+
+          <div
+            class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm z-10 relative"
+          >
+            <div
+              class="absolute -left-3 top-1/2 transform -translate-y-1/2 bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded font-bold hidden md:block"
+            >
+              1 до Багатьох
+            </div>
+            <div
+              class="flex items-center space-x-3 mb-4 border-b border-stone-100 pb-2"
+            >
+              <span class="text-2xl">💬</span>
+              <h3 class="text-xl font-bold font-mono">Quote</h3>
+            </div>
+            <ul class="space-y-2 font-mono text-sm">
+              <li><span class="text-emerald-600">tags</span>: List[String]</li>
+              <li class="bg-amber-50 px-2 py-1 -mx-2 rounded">
+                <span class="text-amber-600 font-bold">author</span>:
+                ReferenceField(Author)
+              </li>
+              <li><span class="text-emerald-600">quote</span>: String</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="setup" class="pt-8 pb-16">
+        <div class="mb-6">
+          <h2 class="text-3xl font-bold text-stone-900 mb-4">
+            Процес Розгортання та Запуску
+          </h2>
+          <p
+            class="text-lg text-stone-600 border-l-4 border-amber-500 pl-4 py-1 bg-stone-100"
+          >
+            Покроковий посібник з налаштування середовища. Натисніть на кроки,
+            щоб відкрити детальні інструкції та команди.
+          </p>
+        </div>
+
+        <div
+          class="bg-white rounded-xl shadow-sm border border-stone-200 divide-y divide-stone-200"
+        >
+          <div class="p-2">
+            <button
+              onclick="toggleAccordion('step1')"
+              class="w-full text-left p-4 font-bold text-lg flex justify-between items-center hover:bg-stone-50 rounded"
+            >
+              <span>1. Клонування та Залежності (Poetry)</span>
+              <span id="icon-step1" class="text-stone-400">▼</span>
+            </button>
+            <div id="step1" class="hidden px-4 pb-4 space-y-2 text-stone-700">
+              <p>
+                Використовуйте сучасний інструмент <strong>Poetry</strong> для
+                керування залежностями:
+              </p>
+              <div
+                class="bg-stone-900 text-stone-100 font-mono text-sm p-3 rounded"
+              >
+                git clone &lt;your-repository-url&gt;<br />
+                cd retro-tech-quotes-db<br />
+                poetry install
+              </div>
+            </div>
+          </div>
+
+          <div class="p-2">
+            <button
+              onclick="toggleAccordion('step2')"
+              class="w-full text-left p-4 font-bold text-lg flex justify-between items-center hover:bg-stone-50 rounded"
+            >
+              <span>2. Налаштування Змінних Середовища (.env)</span>
+              <span id="icon-step2" class="text-stone-400">▼</span>
+            </button>
+            <div id="step2" class="hidden px-4 pb-4 space-y-2 text-stone-700">
+              <p>
+                Створіть файл
+                <code class="bg-stone-100 px-1 rounded">.env</code> у корені
+                проєкту (не додавайте в git!):
+              </p>
+              <div
+                class="bg-stone-900 text-stone-100 font-mono text-sm p-3 rounded"
+              >
+                MONGODB_URI=mongodb+srv://&lt;user&gt;:&lt;pass&gt;@cluster0...<br />
+                REDIS_HOST=localhost<br />
+                REDIS_PORT=6379
+              </div>
+              <p
+                class="text-sm bg-red-50 text-red-700 p-2 border-l-2 border-red-500 mt-2"
+              >
+                Ніколи не публікуйте .env у відкритих репозиторіях!
+              </p>
+            </div>
+          </div>
+
+          <div class="p-2">
+            <button
+              onclick="toggleAccordion('step3')"
+              class="w-full text-left p-4 font-bold text-lg flex justify-between items-center hover:bg-stone-50 rounded"
+            >
+              <span>3. Запуск Інфраструктури (Docker & DB)</span>
+              <span id="icon-step3" class="text-stone-400">▼</span>
+            </button>
+            <div id="step3" class="hidden px-4 pb-4 space-y-2 text-stone-700">
+              <p>Запустіть Redis через Docker та очистіть БД перед імпортом:</p>
+              <div
+                class="bg-stone-900 text-stone-100 font-mono text-sm p-3 rounded"
+              >
+                docker run --name redis-cache -p 6379:6379 -d redis<br />
+                poetry run python clean_db.py<br />
+                poetry run python main.py
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-stone-900 text-stone-400 py-6 text-center text-sm">
+      <p>
+        Аналітичний дашборд створено на базі документації Retro-Tech Quotes
+        Database.
+      </p>
+      <p class="mt-2 font-mono text-emerald-500">MIT License</p>
+    </footer>
+
+    <script>
+      function scrollToSection(id) {
+        document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+      }
+
+      const ctx = document.getElementById("techStackChart").getContext("2d");
+      new Chart(ctx, {
+        type: "doughnut",
+        data: {
+          labels: [
+            "Python (Core logic)",
+            "MongoDB (Data storage)",
+            "Redis (Caching layer)",
+            "Poetry (Dependency sync)",
+            "Docker (Environment)",
+          ],
+          datasets: [
+            {
+              data: [35, 25, 20, 10, 10],
+              backgroundColor: [
+                "#10B981",
+                "#F59E0B",
+                "#EF4444",
+                "#3B82F6",
+                "#6B7280",
+              ],
+              borderWidth: 2,
+              borderColor: "#ffffff",
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: "bottom",
+              labels: {
+                font: { family: "'Inter', sans-serif" },
+                usePointStyle: true,
+                padding: 20,
+              },
+            },
+            tooltip: {
+              callbacks: {
+                label: function (context) {
+                  let label = context.label || "";
+                  return " " + label;
+                },
+              },
+            },
+          },
+          cutout: "65%",
+        },
+      });
+
+      function simulateCache(step) {
+        const btn1 = document.getElementById("btn-request-1");
+        const btn2 = document.getElementById("btn-request-2");
+        const viz1 = document.getElementById("cache-viz-1");
+        const viz2 = document.getElementById("cache-viz-2");
+
+        if (step === 1) {
+          btn1.className = "tab-active px-4 py-2 rounded-l font-medium";
+          btn2.className = "tab-inactive px-4 py-2 rounded-r font-medium";
+          viz1.classList.remove("hidden");
+          viz2.classList.add("hidden");
+        } else {
+          btn2.className = "tab-active px-4 py-2 rounded-r font-medium";
+          btn1.className = "tab-inactive px-4 py-2 rounded-l font-medium";
+          viz2.classList.remove("hidden");
+          viz1.classList.add("hidden");
+        }
+      }
+
+      const commands = {
+        "exact-name": `>_ name: Albert Einstein\n\n[DB] Executing query in MongoDB...\nFound 2 quotes by Albert Einstein.\n\n"Imagination is more important than knowledge."\nTags: [inspiration, wisdom]\n\n"Life is like riding a bicycle."\nTags: [life, motivation]`,
+
+        "regex-name": `>_ name: Al\n\n[SYS] Data retrieved from Redis cache...\nFound matching authors using regex (Al*).\n\nAuthor: Albert Einstein\n"Imagination is more important..."\n\nAuthor: Alan Turing\n"Sometimes it is the people..."`,
+
+        "exact-tag": `>_ tag: life\n\n[DB] Executing query in MongoDB...\nFound quotes with exact tag 'life'.\n\n"Life is like riding a bicycle." (Albert Einstein)\n"Get busy living or get busy dying." (Stephen King)`,
+
+        "regex-tag": `>_ tag: li\n\n[DB] Executing query in MongoDB...\nFound quotes matching tag regex (li*).\n\nMatches found for tags: [life, live, light]\nDisplaying 5 quotes...`,
+
+        "multi-tag": `>_ tags: success,humor\n\n[DB] Executing query in MongoDB...\nSearching with OR logic.\n\n"A day without sunshine is like, you know, night." (Steve Martin) - Tag: [humor]\n"Success is not final..." (Winston Churchill) - Tag: [success]`,
+      };
+
+      let isTyping = false;
+      function runCommand(key) {
+        if (isTyping) return;
+        const output = document.getElementById("terminal-output");
+        const textToType = commands[key];
+        output.innerHTML = "";
+
+        let i = 0;
+        isTyping = true;
+
+        function typeWriter() {
+          if (i < textToType.length) {
+            output.innerHTML += textToType.charAt(i);
+            i++;
+            setTimeout(typeWriter, 15);
+          } else {
+            isTyping = false;
+            output.innerHTML += '\n\n>_ <span class="animate-pulse">_</span>';
+          }
+        }
+        typeWriter();
+      }
+
+      function toggleAccordion(id) {
+        const content = document.getElementById(id);
+        const icon = document.getElementById("icon-" + id);
+        if (content.classList.contains("hidden")) {
+          content.classList.remove("hidden");
+          icon.innerText = "▲";
+        } else {
+          content.classList.add("hidden");
+          icon.innerText = "▼";
+        }
+      }
+    </script>
+  </body>
+</html>
