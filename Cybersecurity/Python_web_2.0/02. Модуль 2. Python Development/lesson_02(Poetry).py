@@ -12,12 +12,12 @@ python --version
 3. Встанови poetry командою:
 (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | python -
 4. Провірь чи встановлений poetry командою:
-poetry --version 
+poetry --version
 5. Створи файли за допомогою команди poetry init:
 pyproject.toml
 .gitignore
 README.md
-6. Пропиши в них відповідний код: 
+6. Пропиши в них відповідний код:
 7. Щоб відкрити термінал у VS Code, просто натисніть Ctrl + ~ (тильда), щоб відкрити вбудований термінал.
 8. Командами cd [відповідна директорія] та cd .. зайди терміналом в директорію, де лежить твій проект
 9. Свори віртуальне середовище poetry у твоїй визначеній директорії командою:
@@ -46,7 +46,7 @@ $VENV_PATH/bin/pip install poetry
 """
 # ====================================================================================================
 """
-Припустимо, що ми ввели команду 
+Припустимо, що ми ввели команду
     poetry new solution
 , тоді ми отримаємо наступну структуру каталогів:
 
@@ -86,8 +86,8 @@ build-backend = "poetry.core.masonry.api"
 """
 # ====================================================================================================
 """
-Розділ tool.poetry призначений для опису проекту: назва, версія, коротка інформація про проект тощо. 
-Далі слідує tool.poetry.dependencies, саме тут вказані всі production залежності. 
+Розділ tool.poetry призначений для опису проекту: назва, версія, коротка інформація про проект тощо.
+Далі слідує tool.poetry.dependencies, саме тут вказані всі production залежності.
 Розділ tool.poetry.dev-dependencies призначений для залежностей, які використовуються під час розробки, наприклад pytest для тестів.
 """
 # ====================================================================================================
@@ -155,7 +155,7 @@ Available commands:
   show               Shows information about packages.
   sync               Update the project's environment according to the lockfile.
   update             Update the dependencies as according to the pyproject.toml file.
-  version            Shows the version of the project or bumps it when a valid bump rule is provided.    
+  version            Shows the version of the project or bumps it when a valid bump rule is provided.
 
  cache
   cache clear        Clear Poetry's caches.
@@ -175,12 +175,12 @@ Available commands:
 
  python
   python install     Install the specified Python version from the Python Standalone Builds project. (experimental feature)
-  python list        Shows Python versions available for this environment. (experimental feature)        
-  python remove      Remove the specified Python version if managed by Poetry. (experimental feature)    
+  python list        Shows Python versions available for this environment. (experimental feature)
+  python remove      Remove the specified Python version if managed by Poetry. (experimental feature)
 
  self
   self add           Add additional packages to Poetry's runtime environment.
-  self install       Install locked packages (incl. addons) required by this Poetry installation.        
+  self install       Install locked packages (incl. addons) required by this Poetry installation.
   self lock          Lock the Poetry installation's system requirements.
   self remove        Remove additional packages from Poetry's runtime environment.
   self show          Show packages from Poetry's runtime environment.
@@ -200,7 +200,7 @@ Available commands:
 2. Використайте команду cd, щоб перейти до директорії вашого проекту, де знаходиться файл pyproject.toml. Наприклад:
     cd path/to/your/project
 3. Використовуйте команду poetry shell, щоб активувати віртуальне середовище, створене poetry:
-    poetry shell    
+    poetry shell
 4. Після активації віртуального середовища ви можете запустити ваш проект за допомогою команди python, вказуючи головний файл вашого проекту. Наприклад:
     python main.py
 5. Якщо ви хочете запустити проект без активації оболонки, ви можете використовувати команду poetry run, яка дозволяє виконувати команди в контексті віртуального середовища. Наприклад:
@@ -222,7 +222,7 @@ Available commands:
 
 Крок 5. Активувати віртуальне оточення
     poetry shell
-⚠️ Але в нових версіях Poetry poetry shell інколи не працює без окремого плагіна. 
+⚠️ Але в нових версіях Poetry poetry shell інколи не працює без окремого плагіна.
 
 Якщо виникають проблеми з активацією, можна використовувати команду:
     poetry env activate
@@ -232,17 +232,18 @@ cd "D:\IT school\Projects\Projects_GoIT\Cybersecurity\Python_Web_2.0\07. Мод�
 poetry init
 poetry install
 poetry env activate
+exit
 """
 # ====================================================================================================
 """
 ВАРІАНТ 2 — якщо хочеш, щоб .venv створювався всередині папки проєкту (ДУЖЕ РЕКОМЕНДУЮ)
 
 За замовчуванням Poetry часто створює віртуальне середовище десь у кеші, а не в папці проєкту.
-Для VSCode і навчання краще зробити локальний .venv. 
+Для VSCode і навчання краще зробити локальний .venv.
 Для цього потрібно виконати команду:
     poetry config virtualenvs.in-project true
 
-Після цього, коли ти виконаєш команду 
+Після цього, коли ти виконаєш команду
     poetry install
 , в папці проєкту з'явиться папка .venv, яка міститиме віртуальне середовище для цього проєкту.
 Потім ти можеш активувати це середовище командою:
@@ -283,5 +284,6 @@ poetry install
 poetry install --no-root
 poetry env info --path
 poetry shell
+exit
 """
 # ====================================================================================================

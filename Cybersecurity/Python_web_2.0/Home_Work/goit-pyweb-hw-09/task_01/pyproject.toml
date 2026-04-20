@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "scrapy-quotes-retro"
+version = "0.1.0"
+description = "Scrapy project with SOLID architecture and Retro-Tech terminal."
+authors = ["Hrigoriu Programmer <Hrigoriu@gmail.com>"]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Scrapy = "^2.11.0"
+mongoengine = "^0.27.0"
+colorama = "^0.4.6"
+python-dotenv = "^1.0.1"
+pymongo = "4.3.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
