@@ -206,5 +206,6 @@
   "geminiAssistant.model": "gemini-2.5-pro-exp-03-25",
   "geminiAssistant.customModelName": "Generative Language API Key",
   "geminiAssistant.apiKey": "AIzaSyCiujJDg_fTdXO2FRR-v7Wf766K6p3zLaE",
-  "geminicodeassist.project": "responsive-legacy-5sdh5"
+  "geminicodeassist.project": "responsive-legacy-5sdh5",
+  "geminicodeassist.agentYoloMode": true
 }

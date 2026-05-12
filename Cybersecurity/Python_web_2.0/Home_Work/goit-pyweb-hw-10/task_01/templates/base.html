@@ -1,0 +1,51 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Quotes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sage: '#9CAEA9',
+                        charcoal: '#2D3748',
+                        ecowhite: '#F7F9F8'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-ecowhite text-charcoal font-sans antialiased min-h-screen flex flex-col">
+
+    <nav class="border-b border-sage/20 bg-white shadow-sm">
+        <div class="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center">
+            <a href="/" class="text-2xl font-light text-sage tracking-wide">Eco<span class="font-semibold text-charcoal">Quotes</span></a>
+            <div class="space-x-4 flex items-center">
+                {% if user.is_authenticated %}
+                    <span class="text-sm text-gray-500 hidden md:inline mr-4">Привіт, {{ user.username }}</span>
+                    <a href="{% url 'quotes:add_author' %}" class="text-sm hover:text-sage transition font-medium">Додати автора</a>
+                    <a href="{% url 'quotes:add_quote' %}" class="text-sm hover:text-sage transition font-medium">Додати цитату</a>
+
+                    <form action="{% url 'users:logout' %}" method="post" class="inline ml-4">
+                        {% csrf_token %}
+                        <button type="submit" class="text-sm border border-charcoal/20 px-5 py-2 rounded-full hover:bg-gray-50 transition cursor-pointer">Вийти</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'users:login' %}" class="text-sm hover:text-sage transition font-medium">Увійти</a>
+                    <a href="{% url 'users:register' %}" class="text-sm bg-charcoal text-white px-5 py-2 rounded-full hover:bg-opacity-90 transition font-medium">Реєстрація</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-6 py-12 flex-grow w-full flex flex-col md:flex-row gap-12">
+        {% block content %}{% endblock %}
+    </main>
+
+</body>
+</html>

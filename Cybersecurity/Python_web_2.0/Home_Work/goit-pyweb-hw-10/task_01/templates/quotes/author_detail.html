@@ -1,0 +1,51 @@
+<!-- templates/quotes/author_detail.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="w-full max-w-4xl mx-auto space-y-8">
+
+    <div class="bg-white p-10 rounded-3xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] border border-sage/10 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-2 h-full bg-sage"></div>
+        <div class="flex justify-between items-start mb-6 border-b border-sage/20 pb-6 pl-4">
+            <div>
+                <h2 class="text-3xl font-light text-charcoal mb-2">{{ author.fullname }}</h2>
+                <p class="text-sm text-gray-500">
+                    <span class="font-medium">Народився/лась:</span> {{ author.born_date|default:"Невідомо" }}
+                    <span class="mx-2">|</span>
+                    <span class="font-medium">Місце:</span> {{ author.born_location|default:"Невідомо" }}
+                </p>
+            </div>
+            <a href="{% url 'quotes:quote_list' %}" class="text-sm border border-charcoal/10 px-4 py-2 rounded-full hover:bg-gray-50 transition">← До всіх цитат</a>
+        </div>
+
+        <div class="pl-4">
+            <h3 class="text-sm font-medium text-sage uppercase tracking-wider mb-4">Біографія</h3>
+            <p class="text-charcoal leading-relaxed font-light whitespace-pre-line">
+                {{ author.description|default:"Опис відсутній." }}
+            </p>
+        </div>
+    </div>
+
+    <div class="pl-4 pt-4">
+        <h3 class="text-xl font-light text-charcoal mb-6">Цитати автора ({{ quotes.count }}):</h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {% for quote in quotes %}
+            <div class="bg-ecowhite p-8 rounded-3xl border border-sage/10 hover:shadow-md transition flex flex-col justify-between">
+                <p class="text-lg font-light leading-relaxed mb-6 text-charcoal italic">"{{ quote.text }}"</p>
+                <div class="flex gap-2 flex-wrap">
+                    {% for tag in quote.tags.all %}
+                    <a href="{% url 'quotes:quote_list_by_tag' tag.name %}" class="text-xs bg-white border border-sage/20 text-gray-500 px-3 py-1 rounded-full hover:bg-sage hover:text-white hover:border-transparent transition">
+                        {{ tag.name }}
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+            {% empty %}
+                <p class="text-gray-400 font-light">Для цього автора ще не додано жодної цитати.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}
