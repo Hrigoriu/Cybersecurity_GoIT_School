@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokemon Collection</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🎮 Pokemon Collection</h1>
+        <p>Search, collect, and manage your favorite Pokemon</p>
+      </header>
+
+      <div class="search-section">
+        <div class="search-form">
+          <div class="search-container">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Enter Pokemon name (e.g., pikachu, charizard, dragonite)..."
+              autocomplete="off"
+            />
+            <div id="autocompleteDropdown" class="autocomplete-dropdown"></div>
+          </div>
+          <button onclick="searchPokemon()">Search</button>
+        </div>
+
+        <div id="searchResult" class="search-result"></div>
+      </div>
+
+      <h2>My Pokemon Collection</h2>
+      <div id="pokemonContainer" class="pokemon-grid">
+        <div class="loading">Loading your Pokemon collection...</div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
